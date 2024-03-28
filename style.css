@@ -2,24 +2,48 @@
     box-sizing: border-box;
 }
 body{
+    background-color: #e4f7ee;
     margin: 0;
+    font-family: 'Lora';
 }
 header{
-    background-color: hsl(0, 0%, 86%);
+    background-color: #c7e9ed;
     text-align: center;
     padding: 25px;
 }
 .navbar{
-    background-color: hsl(0, 0%, 15%);
+    background-color: #b2caed;
     height: 50px;
+
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center items horizontally */
 }
-aside{
-    width: 20%;
-    float: left;
-    padding: 10px;
+.navbar ul {
+    list-style-type: none; /* Removes bullet points from the list */
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    display: inline; /* Display list items horizontally */
+    margin: 0 10px;
+}
+
+.navbar li a {
+    display: inline-block; /* Make anchor tags behave like blocks */
+    padding: 10px 20px; /* Add padding to the anchor tags */
+    color: #fff; /* Text color */
+    text-decoration: none; /* Remove underlines from links */
+    font-size: 18px;
+}
+
+.navbar li a:hover {
+    background-color: #555; /* Background color on hover */
 }
 section{
-    width: 40%;
+    background-color: #f0e8fa;
+    width: 35%;
     float: left;
     padding: 10px;
 }
@@ -31,7 +55,7 @@ article{
 footer{
     display: block;
     clear: both;
-    background-color: hsl(0, 0%, 86%);
+    background-color: #c7e9ed;
     text-align: center;
     padding: 25px;
 }
