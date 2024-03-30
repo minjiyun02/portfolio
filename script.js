@@ -31,6 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function openPDF() {
-      window.open(document.getElementById('resume-link').getAttribute('href'));
+      window.open(document.getElementById('resume-link').getAttribute('href')); 
     }
   });
