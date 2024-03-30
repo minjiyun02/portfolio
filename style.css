@@ -5,9 +5,13 @@
   }
   
   /* fade in */
-  .fade-in {
+.fade-in {
     opacity: 1;
-  }
+}
+
+.indexbody {
+    background-color: #fff;
+}
 
 body {
     background-color:#96abc0;
