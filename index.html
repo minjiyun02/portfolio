@@ -3,19 +3,1028 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minji Yun</title>
-<link rel="stylesheet" href="style.css">
+<title>Minji Yun — Technical Product Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<!-- Google fonts import-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  :root {
+    --ink: #0e0d0c;
+    --ink-soft: #3a3834;
+    --ink-muted: #7c7870;
+    --paper: #f5f0e8;
+    --paper-dark: #ece7dc;
+    --paper-card: #faf7f2;
+    --accent: #c84b2f;
+    --accent-warm: #e8763a;
+    --accent-teal: #1a6b5a;
+    --accent-gold: #b8922a;
+    --line: rgba(14,13,12,0.12);
+  }
 
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(245,240,232,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 4rem 6rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 420px;
+    margin-bottom: 3rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .btn-outline:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-art {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-circle-outer {
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: var(--paper-dark);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-circle-inner {
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .hero-initials {
+    font-family: 'DM Serif Display', serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.05em;
+  }
+
+  .hero-title-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    background: var(--paper-dark);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .stat-item { text-align: right; }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { position: relative; z-index: 1; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    padding: 8rem 6rem;
+    background: var(--paper-dark);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p:first-child {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .about-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .fact-row {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .fact-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ─── EXPERIENCE ─── */
+  #experience {
+    padding: 8rem 6rem;
+  }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.2s;
+  }
+
+  .exp-item:hover { background: rgba(200,75,47,0.03); }
+  .exp-item:first-child { border-top: 1px solid var(--line); }
+
+  .exp-meta { padding-top: 0.2rem; }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .exp-company {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  .tag-pm { background: rgba(200,75,47,0.1); color: var(--accent); }
+  .tag-eng { background: rgba(26,107,90,0.1); color: var(--accent-teal); }
+  .tag-lead { background: rgba(184,146,42,0.1); color: var(--accent-gold); }
+
+  .exp-content {}
+
+  .exp-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.12em;
+  }
+
+  /* ─── SKILLS ─── */
+  #skills {
+    padding: 8rem 6rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-top: 4px solid var(--accent);
+  }
+
+  #skills .section-title { color: var(--paper); }
+  #skills .section-num { color: var(--accent-warm); }
+  #skills .section-line { background: rgba(245,240,232,0.12); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(245,240,232,0.06);
+  }
+
+  .skill-group {
+    padding: 2.5rem;
+    background: var(--ink);
+    transition: background 0.25s;
+  }
+
+  .skill-group:hover { background: #1a1915; }
+
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(245,240,232,0.75);
+    padding: 0.35rem 0.8rem;
+    border: 1px solid rgba(245,240,232,0.15);
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    color: var(--paper);
+    border-color: var(--accent);
+    background: rgba(200,75,47,0.1);
+  }
+
+  /* ─── AWARDS ─── */
+  #awards {
+    padding: 8rem 6rem;
+    background: var(--paper-dark);
+  }
+
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .award-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .award-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .award-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(14,13,12,0.1); }
+  .award-card:hover::before { transform: scaleX(1); }
+
+  .award-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .award-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .award-org {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
+  /* ─── PASSION ─── */
+  #passion {
+    padding: 8rem 6rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .passion-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+
+  .passion-item {}
+
+  .passion-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .passion-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    padding: 8rem 6rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    border-top: 4px solid var(--accent-gold);
+  }
+
+  .contact-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--paper);
+  }
+
+  .contact-headline em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .contact-sub {
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 3rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(245,240,232,0.25);
+    color: rgba(245,240,232,0.8);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.25s;
+  }
+
+  .contact-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--paper);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 1.5rem 6rem;
+    background: #0a0a09;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+  .delay-5 { animation-delay: 0.7s; }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-right { height: 300px; }
+    .hero-circle-outer { width: 260px; height: 260px; }
+    .hero-circle-inner { width: 200px; height: 200px; }
+    .hero-initials { font-size: 2.5rem; }
+    .hero-stats { bottom: 1rem; right: 1.5rem; gap: 1.5rem; }
+    #about, #experience, #skills, #awards, #passion, #contact { padding: 5rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .passion-row { grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
 </head>
-<body class="indexbody">
+<body>
 
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.4.7/build/spline-viewer.js"></script>
-    <spline-viewer url="https://prod.spline.design/z2Mf0Uw-RY-yY0rM/scene.splinecode"></spline-viewer>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Minji Yun</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow fade-up delay-1">Technical Product Manager · Builder · Creator</p>
+    <h1 class="hero-name fade-up delay-2">
+      Minji<br><em>Yun</em>
+    </h1>
+    <p class="hero-desc fade-up delay-3">
+      CS graduate from UC Davis bridging engineering depth and product strategy. I ship AI-powered products, lead cross-functional teams, and turn user insights into impactful features.
+    </p>
+    <div class="hero-cta fade-up delay-4">
+      <a href="#experience" class="btn-primary">View My Work →</a>
+      <a href="mailto:minjiyun404@gmail.com" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-art">
+      <div class="hero-circle-outer fade-up delay-2">
+        <div class="hero-circle-inner">
+          <div class="hero-initials">MY</div>
+          <div class="hero-title-badge">TPM · Founder · Engineer</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stats fade-up delay-5">
+      <div class="stat-item">
+        <div class="stat-num">1.4K+</div>
+        <div class="stat-label">Users Reached</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3×</div>
+        <div class="stat-label">Award Winner</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>"I believe the best products are built at the intersection of technical rigor and genuine human empathy."</p>
+      <p>As a CS graduate from UC Davis, I've spent the last few years wearing many hats — founding a travel startup, leading a student tech org, shipping AI-powered features as a software engineer, and managing product operations at a US R&D department. Each role has sharpened my ability to zoom in on implementation details and zoom out to the strategic picture.</p>
+      <p>Outside of work, I paint acrylics, crochet, and boulder indoors (currently working toward V4). These hobbies keep me creative, patient, and comfortable with ambiguity — qualities I bring into every product challenge.</p>
+    </div>
+    <div class="about-facts">
+      <div class="fact-row">
+        <div class="fact-label">Education</div>
+        <div class="fact-value">B.S. Computer Science — UC Davis</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Currently</div>
+        <div class="fact-value">Software Engineer, Technical Strategy & Product Ops @ JLK US R&D</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Location</div>
+        <div class="fact-value">United States</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Email</div>
+        <div class="fact-value"><a href="mailto:minjiyun404@gmail.com" style="color:var(--accent);text-decoration:none;">minjiyun404@gmail.com</a></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">GitHub</div>
+        <div class="fact-value"><a href="https://github.com/minjiyun02" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/minjiyun02</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Aug 2025 — Present</div>
+        <div class="exp-company">JLK – US R&D</div>
+        <span class="exp-tag tag-pm">Product Ops</span>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Software Engineer,<br>Technical Strategy & Product Ops</h3>
+        <ul class="exp-bullets">
+          <li>Led localization and deployment strategy for AI-driven software products, aligning capabilities with market-specific requirements</li>
+          <li>Partnered with engineering to define integration standards, drive product improvements, and ensure scalability</li>
+          <li>Directed external partners and vendors to resolve complex system integration challenges</li>
+          <li>Established operational processes and automation to enhance product reliability and incident response</li>
+          <li>Conducted market and competitive analysis to inform product positioning and go-to-market decisions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Apr 2024 — Present</div>
+        <div class="exp-company">Stealth Startup</div>
+        <span class="exp-tag tag-lead">Co-Founder</span>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Founding Engineer<br><em style="font-family:'DM Serif Display',serif;font-size:1rem;color:var(--ink-muted);">Travel Experience Platform</em></h3>
+        <ul class="exp-bullets">
+          <li>Co-founded a travel platform, leading product vision and execution to scale to 1,400+ users</li>
+          <li>Defined roadmap, features, and monetization strategy using market and competitive insights</li>
+          <li>Built and scaled development processes, onboarding team members and improving delivery speed</li>
+          <li>Iterated on product through direct user engagement and feedback-driven feature development</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Mar – May 2025</div>
+        <div class="exp-company">LIKELION US</div>
+        <span class="exp-tag tag-pm">PM Intern</span>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Project Manager Intern</h3>
+        <ul class="exp-bullets">
+          <li>Managed projects in Jira and Slack, coordinating tasks across engineering, marketing, and leadership</li>
+          <li>Organized sprint planning, stand-ups, and stakeholder meetings to track progress</li>
+          <li>Conducted competitor analysis of UI/UX and performed front-end QA testing before release</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Jun – Sep 2024</div>
+        <div class="exp-company">SelfActualize.AI</div>
+        <span class="exp-tag tag-eng">Engineering</span>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Software Engineer Intern</h3>
+        <ul class="exp-bullets">
+          <li>Developed front-end features for an AI coaching platform using HTML, CSS, JavaScript, and TypeScript</li>
+          <li>Built backend APIs and Lambda functions supporting ML-driven features in Python and JavaScript</li>
+          <li>Improved GPT-4o outputs through prompt engineering and targeted debugging</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Jan 2023 – Feb 2024</div>
+        <div class="exp-company">GDSC</div>
+        <span class="exp-tag tag-pm">TPM</span>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Technical Product Manager<br><em style="font-family:'DM Serif Display',serif;font-size:1rem;color:var(--ink-muted);">Google Developer Students Club</em></h3>
+        <ul class="exp-bullets">
+          <li>Led development of an AI-powered recycling app — defined MVP and product direction to reduce waste sorting confusion</li>
+          <li>Built and launched a CNN-based classifier (Flutter, TensorFlow) with confidence scoring</li>
+          <li>Shipped an AI color palette generator, evolving it into a social sharing platform based on user feedback</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Sep 2023 – Jun 2025</div>
+        <div class="exp-company">LIKELION @ UCD</div>
+        <span class="exp-tag tag-lead">Leadership</span>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">President · Full-Stack Developer · Project Manager</h3>
+        <ul class="exp-bullets">
+          <li>Led a student tech organization focused on product development and entrepreneurship</li>
+          <li>Directed a 4-person team to design and build a sign language translation app prototype</li>
+          <li>Won 1st place at the 2023 LIKELION US Ideathon with the sign language app</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title">Product Management</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Roadmapping</span>
+        <span class="skill-tag">Agile / Scrum</span>
+        <span class="skill-tag">Backlog Prioritization</span>
+        <span class="skill-tag">Sprint Planning</span>
+        <span class="skill-tag">User Research</span>
+        <span class="skill-tag">Go-to-Market</span>
+        <span class="skill-tag">Competitive Analysis</span>
+        <span class="skill-tag">PRD Writing</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Engineering</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">Flutter</span>
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">AWS Lambda</span>
+        <span class="skill-tag">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools & Ops</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Jira</span>
+        <span class="skill-tag">Trello</span>
+        <span class="skill-tag">GitHub Kanban</span>
+        <span class="skill-tag">Slack</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">QA Testing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Honors & Awards</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="awards-grid">
+    <div class="award-card reveal">
+      <span class="award-icon">🥇</span>
+      <div class="award-title">1st Place — LIKELION US Ideathon</div>
+      <div class="award-org">Sign Language Translation App · 2023</div>
+    </div>
+    <div class="award-card reveal">
+      <span class="award-icon">🏆</span>
+      <div class="award-title">1st Place — Climate Solutions Contest</div>
+      <div class="award-org">Agricultural Greenhouse Gas Reduction · UC Davis Student Startup Center</div>
+    </div>
+    <div class="award-card reveal">
+      <span class="award-icon">🚀</span>
+      <div class="award-title">Top 10 Finalist — Upstage AI Hackathon</div>
+      <div class="award-org">Travel Experience Platform Startup · Summer 2024</div>
+    </div>
+    <div class="award-card reveal">
+      <span class="award-icon">✨</span>
+      <div class="award-title">Most Creative Project Award</div>
+      <div class="award-org">Google Developer Students Club · Winter 2023</div>
+    </div>
+  </div>
+</section>
+
+<!-- PASSION PROJECTS -->
+<section id="passion">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Beyond Work</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="passion-row reveal">
+    <div class="passion-item">
+      <div class="passion-label">Visual Art</div>
+      <div class="passion-name">Acrylic Abstract Painting</div>
+    </div>
+    <div class="passion-item">
+      <div class="passion-label">Craft</div>
+      <div class="passion-name">Crochet & Textile Design</div>
+    </div>
+    <div class="passion-item">
+      <div class="passion-label">Sport</div>
+      <div class="passion-name">Rock Climbing — Bouldering V3 indoors, V0 outdoors</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="contact-headline reveal">Let's build something<br><em>remarkable.</em></h2>
+  <p class="contact-sub reveal">Open to TPM, PM, and product-facing engineering roles</p>
+  <div class="contact-links reveal">
+    <a href="mailto:minjiyun404@gmail.com" class="contact-link">✉ Email</a>
+    <a href="https://linkedin.com/in/yun-minji" target="_blank" class="contact-link">LinkedIn</a>
+    <a href="https://github.com/minjiyun02" target="_blank" class="contact-link">GitHub</a>
+    <a href="tel:5306016417" class="contact-link">📞 Call</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Minji Yun</span>
+  <span>Built with care · UC Davis CS</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
